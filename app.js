@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./server/routes");
-const db = require("./models");
 
 const hostname = "0.0.0.0";
 const port = 3000;
@@ -14,11 +13,10 @@ routes(app);
 
 app.get("*", (req, res) =>
   res.status(200).send({
-    message: "Welcome to the ."
+    message: "Welcome to the API."
   })
 );
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-  db.sequelize.sync();
 });
