@@ -11,6 +11,16 @@ pool:
 
 
 steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm start
+  displayName: 'npm install'
+
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Azure Container Registry'
@@ -19,13 +29,4 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'up -d'
-
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: '10.x'
-#   displayName: 'Install Node.js'
-
-# - script: |
-#     npm install
-#     npm start
-#   displayName: 'npm install and build'
+  displayName: 'Docker Compose Run'
